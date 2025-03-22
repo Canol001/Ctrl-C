@@ -1,0 +1,193 @@
+:root {
+    --bg-color: #fffffff1;
+    --text-color: #000;
+    --textarea-bg: #fff;
+    --textarea-text: #000;
+    --btn-light-bg: #f8f9fa;
+    --btn-dark-bg: #212529;
+    --btn-dark-text: #fff;
+}
+
+body.dark-mode {
+    --bg-color: #1e1e1e;
+    --text-color: #f1f1f1;
+    --textarea-bg: #000;
+    --textarea-text: #fff;
+    --btn-light-bg: #333;
+    --btn-dark-bg: #f8f9fa;
+    --btn-dark-text: #000;
+}
+body.dark-mode .textarea {
+    background-color: var( --bg-color);
+    color: #fff;
+    border: 1px solid #00a914;
+}
+
+.secondHead{
+    font-size: 3.1rem;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.textarea-container {
+    width: 90%;
+    height: 50vh;
+    margin-top: 100px;
+    min-width: 70vw;
+}
+
+textarea {
+    width: 100%;
+    height: 50vh;
+    resize: none;
+    background-color: var(--textarea-bg);
+    color: var(--textarea-text);
+    border: 1px solid #ccc;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+.navbar {
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease;
+}
+
+.navbar-brand {
+    font-size: 3.4rem;
+    font-weight: 900;
+    color: var(--text-color);
+}
+
+.header {
+    font-size:3.2rem;
+    font-weight: 700;
+}
+
+.textarea::placeholder{
+    color: green;
+}
+
+.description {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.btn {
+    min-width: 120px;
+}
+
+.btn-light {
+    background-color: var(--btn-light-bg);
+    color: var(--text-color);
+}
+
+.btn-dark {
+    background-color: var(--btn-dark-bg);
+    color: var(--btn-dark-text);
+}
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.toggle-icon {
+    font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .header {
+        font-size: 2rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+
+    .textarea {
+        height: 40vh;
+        width: 85vw;
+        margin-left: -20px;
+    }
+    .textarea{
+        font-size: 13px;
+    }
+
+    .navbar-brand{
+        font-size: 1.9rem;
+    }
+    .secondHead{
+        font-size: 1.9rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+}
+
+.feature-card {
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+    background-color: #11111100;
+    transition: transform 0.3s ease-in-out;
+    border: 1px solid #ccc;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    background-color: #a2a2a21c;
+}
+
+.feature-icon {
+    background: #fff;
+    color: #000;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 24px;
+}
+
+
+/* Hide text and adjust button size on small screens */
+@media (max-width: 576px) {
+    .btn-text {
+        display: none; /* Hide text on small screens */
+    }
+
+    .responsive-btn {
+        width: 40px !important; /* Force width to be 40px */
+        height: 40px !important; /* Keep height 40px */
+        padding: 0 !important; /* Remove extra padding */
+        min-width: 40px !important; /* Override Bootstrap’s min-width */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

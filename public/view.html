@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ctrl+C</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #fffffff1;
+            --text-color: #000;
+            --textarea-bg: #fff;
+            --textarea-text: #000;
+            --btn-light-bg: #f8f9fa;
+            --btn-dark-bg: #212529;
+            --btn-dark-text: #fff;
+        }
+    
+        body.dark-mode {
+            --bg-color: #1e1e1e;
+            --text-color: #f1f1f1;
+            --textarea-bg: #000;
+            --textarea-text: #fff;
+            --btn-light-bg: #333;
+            --btn-dark-bg: #f8f9fa;
+            --btn-dark-text: #000;
+        }
+        body.dark-mode .textarea {
+            background-color: var( --bg-color);
+            color: #fff;
+            border: 1px solid #00a914;
+        }
+        
+        .secondHead{
+            font-size: 3.1rem;
+        }
+
+        .textarea::placeholder{
+            color: green;
+        }
+    
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+    
+        .container {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+    
+        .textarea-container {
+            width: 90%;
+            height: 50vh;
+            margin-top: 100px;
+            min-width: 70vw;
+        }
+    
+        textarea {
+            width: 100%;
+            height: 50vh;
+            resize: none;
+            background-color: var(--textarea-bg);
+            color: var(--textarea-text);
+            border: 1px solid #ccc;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+    
+        .navbar {
+            background-color: var(--bg-color);
+            transition: background-color 0.3s ease;
+        }
+    
+        .navbar-brand {
+            font-size: 3.4rem;
+            font-weight: 900;
+            color: var(--text-color);
+        }
+    
+        .header {
+            font-size:3.2rem;
+            font-weight: 700;
+        }
+
+    
+        .description {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--text-color);
+        }
+    
+        .btn {
+            min-width: 120px;
+        }
+    
+        .btn-light {
+            background-color: var(--btn-light-bg);
+            color: var(--text-color);
+        }
+    
+        .btn-dark {
+            background-color: var(--btn-dark-bg);
+            color: var(--btn-dark-text);
+        }
+    
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+    
+        .toggle-icon {
+            font-size: 1.5rem;
+        }
+    
+        @media (max-width: 768px) {
+            .header {
+                font-size: 2rem;
+            }
+    
+            .description {
+                font-size: 1rem;
+            }
+    
+            .textarea {
+                height: 40vh;
+                width: 85vw;
+                margin-left: -20px;
+            }
+
+            .textarea{
+                font-size: 13px;
+            }
+
+            .navbar-brand{
+                font-size: 1.9rem;
+            }
+            .secondHead{
+                font-size: 1.9rem;
+            }
+    
+            .btn {
+                font-size: 0.9rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+
+        .feature-card {
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+            background-color: #11111100;
+            transition: transform 0.3s ease-in-out;
+            border: 1px solid #ccc;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background-color: #a2a2a21c;
+        }
+
+        .feature-icon {
+            background: #fff;
+            color: #000;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 24px;
+        }
+    
+        
+</style>
+</head>
+<body>
+    <nav class="navbar navbar-light px-3">
+        <div class="container-fluid d-flex justify-content-between">
+            <a class="navbar-brand" href="#">Ctrl+C</a>
+            <div class="toggle-container" id="themeToggle">
+                <i class="fa-solid fa-sun toggle-icon" id="lightIcon"></i>
+                <i class="fa-solid fa-moon toggle-icon d-none" id="darkIcon"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="header">Here's Your Shared Code</h1>
+        <p class="description">
+            Share and manage your code snippets easily. Copy and paste seamlessly to boost your workflow.
+        </p>
+        <div class="textarea-container mt-3">
+            <textarea id="codeDisplay" class="textarea form-control" readonly></textarea>
+            <div class="mt-3 d-flex justify-content-between">
+                <button id="copyBtn" class="btn btn-light">
+                    <i class="fa-solid fa-copy"></i> Copy Code
+                </button>
+                <button id="pasteBtn" class="btn btn-dark" onclick="window.location.href='/'">
+                    <i class="fa-solid fa-paste"></i> Paste code
+                </button>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="container text-center my-2">
+        <h2 class="fw-bold secondHead">Why Choose <span>Ctrl+C?</span></h2>
+        <div class="row mt-1 g-4">
+            
+            <div class="col-md-4">
+                <div class="feature-card p-4">
+                    <div class="feature-icon mx-auto mb-3">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h5 class="fw-bold">Lightning Fast</h5>
+                    <p>Our system ensures ultra-fast performance, helping you complete tasks in record time.</p>
+                </div>
+            </div>
+    
+            <div class="col-md-4">
+                <div class="feature-card p-4">
+                    <div class="feature-icon mx-auto mb-3">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h5 class="fw-bold">Top Security</h5>
+                    <p>Your data is encrypted and protected with the highest security standards in the industry.</p>
+                </div>
+            </div>
+    
+            <div class="col-md-4">
+                <div class="feature-card p-4">
+                    <div class="feature-icon mx-auto mb-3">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h5 class="fw-bold">No Code Formatting</h5>
+                    <p>Your code stays exactly as you wrote it, without any unwanted modifications or auto-formatting.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="feature-card p-4">
+                    <div class="feature-icon mx-auto mb-3">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h5 class="fw-bold">Longer storage time</h5>
+                    <p>Your code stays live for access for longer periods of time of upto 7 days.</p>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        async function fetchCode() {
+            const slug = window.location.pathname.split("/").pop();
+            try {
+                const response = await fetch(`/api/code/${slug}`);
+                if (!response.ok) throw new Error("Failed to fetch code");
+                const data = await response.json();
+                document.getElementById("codeDisplay").value = data.code || "Code not found";
+            } catch (error) {
+                console.error("Error fetching code:", error);
+                document.getElementById("codeDisplay").value = "Failed to load code.";
+            }
+        }
+
+        //document.getElementById("copyBtn").addEventListener("click", () => {
+        //    const codeText = document.getElementById("codeDisplay").value;
+        //    navigator.clipboard.writeText(codeText)
+        //        .then(() => alert("✅ Code copied!"))
+        //        .catch(err => console.error("Failed to copy: ", err));
+        //});
+
+        document.getElementById("copyBtn").addEventListener("click", () => {
+            const codeText = document.getElementById("codeDisplay").value;
+        
+            if (navigator.clipboard && window.isSecureContext) {
+                // Use modern clipboard API (only works in secure HTTPS contexts)
+                navigator.clipboard.writeText(codeText)
+                    .then(() => alert("✅ Code copied!"))
+                    .catch(err => console.error("Failed to copy: ", err));
+            } else {
+                // Fallback method for mobile
+                const tempTextArea = document.createElement("textarea");
+                tempTextArea.value = codeText;
+                document.body.appendChild(tempTextArea);
+                tempTextArea.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempTextArea);
+                alert("✅ Code copied!");
+            }
+        });
+        
+
+
+        document.addEventListener("DOMContentLoaded", () => {
+            fetchCode();
+            loadTheme();
+        });
+
+        function loadTheme() {
+            const isDarkMode = localStorage.getItem("theme") === "dark";
+            document.body.classList.toggle("dark-mode", isDarkMode);
+            document.getElementById("lightIcon").classList.toggle("d-none", isDarkMode);
+            document.getElementById("darkIcon").classList.toggle("d-none", !isDarkMode);
+        }
+
+        document.getElementById("themeToggle").addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+            const isDarkMode = document.body.classList.contains("dark-mode");
+            localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+
+            document.getElementById("lightIcon").classList.toggle("d-none", isDarkMode);
+            document.getElementById("darkIcon").classList.toggle("d-none", !isDarkMode);
+        });
+    </script>
+</body>
+</html>
