@@ -195,3 +195,24 @@ button:disabled {
 #linkDisplay{
     margin-bottom: 20px;
 }
+
+
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    font-size: 14px;
+}
+
+footer .fab, footer .fas {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+footer .fab:hover, footer .fas:hover {
+    transform: scale(1.2);
+    color: #00cc66;
+}
+
+.text-purple {
+    color: #7952b3; /* Bootstrap Purple */
+}
