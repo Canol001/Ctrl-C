@@ -28,7 +28,7 @@
 
     <!-- Favicon (Displayed on Browser Tabs) -->
     <link rel="icon" href="code-sharing-app.jpg" type="image/jpg">
-    <link rel="apple-touch-icon" sizes="180x180" href="code-sharing-app.jpg">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
     <!-- Theme Color (Mobile Browser UI Color) -->
     <meta name="theme-color" content="#00CC66">
 
@@ -130,50 +130,51 @@
         </div>
     </div>
 
-    <div class="container mt-4">
-        <h3>Recent Links</h3>
-        <div id="recentLinksContainer" class="list-group">
-            <p>Loading...</p>
-        </div>
-    </div>
-    
 
-    <footer class="bg-dark text-light py-3 mt-8">
+    <footer class="bg-dark text-light py-2">
         <div class="container text-center">
-            <div class="row align-items-center">
+            <div class="row align-items-center gy-2">
                 
                 <!-- Technologies Used -->
-                <div class="col-md-4 mb-2">
-                    <h6 class="fw-bold">Built With</h6>
+                <div class="col-md-3">
+                    <h6 class="fw-bold mb-1">Built With</h6>
                     <div class="d-flex justify-content-center gap-2">
-                        <i class="fab fa-html5 fa-lg text-danger" title="HTML5"></i>
-                        <i class="fab fa-css3-alt fa-lg text-primary" title="CSS3"></i>
-                        <i class="fab fa-js fa-lg text-warning" title="JavaScript"></i>
-                        <i class="fab fa-bootstrap fa-lg text-purple" title="Bootstrap"></i>
-                        <i class="fab fa-node-js fa-lg text-success" title="Node.js"></i>
-                        <i class="fas fa-database fa-lg text-secondary" title="MongoDB"></i>
+                        <i class="fab fa-html5 fa-sm text-danger" title="HTML5"></i>
+                        <i class="fab fa-css3-alt fa-sm text-primary" title="CSS3"></i>
+                        <i class="fab fa-js fa-sm text-warning" title="JavaScript"></i>
+                        <i class="fab fa-bootstrap fa-sm text-purple" title="Bootstrap"></i>
+                        <i class="fab fa-node-js fa-sm text-success" title="Node.js"></i>
+                        <i class="fas fa-database fa-sm text-secondary" title="MongoDB"></i>
                     </div>
                 </div>
     
                 <!-- Creator Information -->
-                <div class="col-md-4 mb-2">
-                    <h6 class="fw-bold">Created By</h6>
-                    <p class="mb-1 small">Owano Canol</p>
-                    <p class="text-muted small">Code Sharing Simplified.</p>
+                <div class="col-md-3">
+                    <h6 class="fw-bold mb-1">Created By</h6>
+                    <p class="mb-0 small">Owano Canol</p>
+                    <p class="text-muted small mb-0">Code Sharing Simplified.</p>
+                </div>
+    
+                <!-- Recent Links Section -->
+                <div class="col-md-3">
+                    <h6 class="fw-bold mb-1">Recent Links</h6>
+                    <div id="recent-links" class="list-group list-group-flush small">
+                        <p class="text-muted text-center mb-0">No recent links yet...</p>
+                    </div>
                 </div>
     
                 <!-- Social Media Links -->
-                <div class="col-md-4 mb-2">
-                    <h6 class="fw-bold">Follow Me</h6>
-                    <div class="d-flex justify-content-center gap-3">
+                <div class="col-md-3">
+                    <h6 class="fw-bold mb-1">Follow Me</h6>
+                    <div class="d-flex justify-content-center gap-2">
                         <a href="https://twitter.com/Canol_Okoth" target="_blank" class="text-light">
-                            <i class="fab fa-twitter fa-lg"></i>
+                            <i class="fab fa-twitter fa-sm"></i>
                         </a>
                         <a href="https://github.com/canol" target="_blank" class="text-light">
-                            <i class="fab fa-github fa-lg"></i>
+                            <i class="fab fa-github fa-sm"></i>
                         </a>
                         <a href="https://linkedin.com/in/canol" target="_blank" class="text-light">
-                            <i class="fab fa-linkedin fa-lg"></i>
+                            <i class="fab fa-linkedin fa-sm"></i>
                         </a>
                     </div>
                 </div>
@@ -185,6 +186,7 @@
             </div>
         </div>
     </footer>
+    
     
 
     <script src="script.js"></script>
@@ -271,8 +273,9 @@
             console.error("Error fetching recent links:", error);
         }
     });
-    
-</script>
+
+
+    </script>
 </body>
 </html>
-
+    
