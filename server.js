@@ -1,15 +1,25 @@
 require("dotenv").config();
 const express = require("express");
+const session = require("express-session");
 const path = require("path");
 const connectDB = require("./database");
 const codeRoutes = require("./routes/codeRoutes");
 
 const app = express();
 
-// Increase file size limit to 50MB
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(express.static(path.join(__dirname, "public")));
+
+// Session Configuration
+app.use(
+    session({
+        secret: "yourSecretKey", // Change this to a strong secret key
+        resave: false,
+        saveUninitialized: true,
+        cookie: { maxAge: 1000 * 60 * 60 * 24 }, // 24-hour session
+    })
+);
 
 connectDB();
 

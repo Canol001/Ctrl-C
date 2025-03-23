@@ -14,21 +14,21 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Ctrl+C">
     <meta name="twitter:description" content="Sharing your codes made easy.">
-    <meta name="twitter:image" content="https://canol.rollbackbets.top/favicon.png">
+    <meta name="twitter:image" content="https://ctrl-c.onrender.com/code-sharing-app.jpg">
     <meta name="twitter:site" content="@Canol_Okoth">
     <meta name="twitter:creator" content="@Canol_okoth">
 
     <!-- Open Graph Protocol (For Social Sharing - Facebook, LinkedIn, WhatsApp) -->
     <meta property="og:title" content="Ctrl+C">
     <meta property="og:description" content="Sharing your code made easy.">
-    <meta property="og:image" content="https://canol.rollbackbets.top/favicon.png">
-    <meta property="og:url" content="https://yourwebsite.com">
+    <meta property="og:image" content="code-sharing-app.jpg">
+    <meta property="og:url" content="https://ctrl-c.onrender.com">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Ctrl+C">
 
     <!-- Favicon (Displayed on Browser Tabs) -->
-    <link rel="icon" href="favicon.png" type="image/png">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+    <link rel="icon" href="code-sharing-app.jpg" type="image/jpg">
+    <link rel="apple-touch-icon" sizes="180x180" href="code-sharing-app.jpg">
     <!-- Theme Color (Mobile Browser UI Color) -->
     <meta name="theme-color" content="#00CC66">
 
@@ -129,6 +129,14 @@
     
         </div>
     </div>
+
+    <div class="container mt-4">
+        <h3>Recent Links</h3>
+        <div id="recentLinksContainer" class="list-group">
+            <p>Loading...</p>
+        </div>
+    </div>
+    
 
     <footer class="bg-dark text-light py-3 mt-8">
         <div class="container text-center">
@@ -246,6 +254,23 @@
         });
     });
     
+    document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            const response = await fetch("/api/code/recent-links");
+            const recentLinks = await response.json();
+    
+            const recentLinksContainer = document.getElementById("recentLinksContainer");
+            if (recentLinks.length === 0) {
+                recentLinksContainer.innerHTML = "<p>No recent links yet...</p>";
+            } else {
+                recentLinksContainer.innerHTML = recentLinks.map(link => `
+                    <a href="/code/${link.slug}" class="list-group-item list-group-item-action">${link.slug}</a>
+                `).join("");
+            }
+        } catch (error) {
+            console.error("Error fetching recent links:", error);
+        }
+    });
     
 </script>
 </body>
