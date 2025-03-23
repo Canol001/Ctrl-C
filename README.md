@@ -2,7 +2,8 @@ Ctrl+C - Code Sharing App
 Ctrl+C is a simple and efficient code-sharing app where users can paste code snippets and get a sharable link. The links expire after 7 days, ensuring temporary and secure sharing.
 
 Live Demo
-Ctrl+C on Render
+[Visit Ctrl+C](https://ctrl-c.onrender.com)
+
 
 Features
 ✅ Paste & Share – Users can paste their code and generate a unique link.
