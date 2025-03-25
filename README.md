@@ -47,6 +47,7 @@ sh
 Copy code
 npm start
 The server will run at http://localhost:3000.
+![image](https://github.com/user-attachments/assets/421b1581-926b-441d-8a40-fe139a1923f9)
 
 Usage
 1. Paste Code
@@ -60,6 +61,7 @@ Copy code
 https://ctrl-c.onrender.com/snippet/abcd1234
 3. Accessing the Code
 Anyone with the link can view the code until it expires in 7 days.
+![image](https://github.com/user-attachments/assets/adadf5d5-8d2a-427d-b710-3d8551e6fe33)
 
 API Endpoints (If implemented)
 Method	Endpoint	Description
@@ -71,6 +73,7 @@ Future Enhancements
 🎨 Dark Mode – Improve UI for better readability.
 📌 Pin Snippets – Allow users to extend the expiration time.
 📊 Analytics – Track snippet views.
+![image](https://github.com/user-attachments/assets/27821cc8-b2f1-40a4-8f7a-58d03afb2500)
 
 Contributing
 We welcome contributions! Follow these steps to contribute:
@@ -88,19 +91,3 @@ Open a Pull Request
 License
 This project is licensed under the MIT License.
 
-Would you like me to add anything else, like a logo or API documentation?
-
-
-
-
-
-
-
-
-
-
-
-Reason
-
-
-ChatGPT can make mistakes. C
