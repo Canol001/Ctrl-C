@@ -42,10 +42,10 @@ PORT=3000
 MONGO_URI=your_mongodb_connection_string
 BASE_URL=https://ctrl-c.onrender.com
 EXPIRATION_DAYS=7
-4. Start the Server
-sh
-Copy code
+5. Start the Server
+```
 npm start
+```
 The server will run at http://localhost:3000.
 ![image](https://github.com/user-attachments/assets/421b1581-926b-441d-8a40-fe139a1923f9)
 
