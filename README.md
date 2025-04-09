@@ -56,9 +56,9 @@ Users enter their code in the text area and click the "Generate Link" button.
 2. Get a Unique Link
 A sharable link is provided, e.g.,
 
-arduino
-Copy code
-https://ctrl-c.onrender.com/snippet/abcd1234
+```
+https://ctrl-c.onrender.com/codet/abcd1234
+```
 3. Accessing the Code
 Anyone with the link can view the code until it expires in 7 days.
 ![image](https://github.com/user-attachments/assets/adadf5d5-8d2a-427d-b710-3d8551e6fe33)
