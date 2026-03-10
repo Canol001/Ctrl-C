@@ -1,266 +1,370 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="View and copy shared code snippets quickly and securely.">
-    <meta name="keywords" content="code sharing, pastebin, snippet, developer tools">
+    <meta name="description" content="Sharing your codes made easy.">
+    <meta name="keywords" content="web development, coding, technology, canol, maseno">
     <meta name="author" content="Owano Canol">
-    <meta name="theme-color" content="#00CC66">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="content-language" content="en">
+    <title>Ctrl+C</title>
 
-    <title>Ctrl+C – Shared Code</title>
+<!-- Twitter Card (Enhances Tweet Appearance) -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ctrl+C">
+<meta name="twitter:description" content="Sharing your codes made easy.">
+<meta name="twitter:image" content="https://ctrl-c.onrender.com/code-sharing-app.jpg">
+<meta name="twitter:site" content="@Canol_Okoth">
+<meta name="twitter:creator" content="@Canol_okoth">
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="Ctrl+C – Shared Code">
-    <meta property="og:description" content="View and copy this code snippet.">
-    <meta property="og:image" content="https://ctrl-c.onrender.com/code-sharing-app.jpg">
-    <meta property="og:url" content="https://ctrl-c.onrender.com">
-    <meta property="og:type" content="website">
+<!-- Open Graph Protocol (For Social Sharing - Facebook, LinkedIn, WhatsApp) -->
+<meta property="og:title" content="Ctrl+C">
+<meta property="og:description" content="Sharing your code made easy.">
+<meta property="og:image" content="code-sharing-app.jpg">
+<meta property="og:url" content="https://ctrl-c.onrender.com">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ctrl+C">
+<link rel="manifest" href="/manifest.json" />
+<!-- Favicon (Displayed on Browser Tabs) -->
+<link rel="icon" href="code-sharing-app.jpg" type="image/jpg">
+<link rel="apple-touch-icon" sizes="180x180" href="code-sharing-app.jpg">
+<!-- Theme Color (Mobile Browser UI Color) -->
+<meta name="theme-color" content="#00CC66">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="3bac2e4a-829b-455b-b676-13c5c3c57638"></script>
+<style>
+    :root {
+        --bg-color: #fffffff1;
+        --text-color: #000;
+        --textarea-bg: #fff;
+        --textarea-text: #000;
+        --btn-light-bg: #f8f9fa;
+        --btn-dark-bg: #212529;
+        --btn-dark-text: #fff;
+    }
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Ctrl+C – Shared Code">
-    <meta name="twitter:description" content="View and copy this code snippet.">
-    <meta name="twitter:image" content="https://ctrl-c.onrender.com/code-sharing-app.jpg">
+    body.dark-mode {
+        --bg-color: #1e1e1e;
+        --text-color: #f1f1f1;
+        --textarea-bg: #000;
+        --textarea-text: #fff;
+        --btn-light-bg: #333;
+        --btn-dark-bg: #f8f9fa;
+        --btn-dark-text: #000;
+    }
+    body.dark-mode .textarea {
+        background-color: var( --bg-color);
+        color: #fff;
+        border: 1px solid #00a914;
+    }
+    
+    .secondHead{
+        font-size: 3.1rem;
+    }
 
-    <!-- Icons -->
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    .textarea::placeholder{
+        color: green;
+    }
 
-    <!-- Analytics -->
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="3bac2e4a-829b-455b-b676-13c5c3c57638"></script>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap');
 
-    <!-- PWA -->
-    <link rel="manifest" href="/manifest.json">
+    body {
+        font-family: 'IBM Plex Mono', monospace;
+    }
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
 
-    <!-- Bootstrap & Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    .container {
+        min-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 2rem;
+    }
 
-    <!-- Highlight.js (core + default theme + auto-detect) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css" integrity="sha512-3xLMEigMNYLDJLAgaGlDSxpGykyb+nQnJBzbkQy2a0gyVKL2ZpNOPIj1rD8IPFaJbwAg5aD7xSel2A+4UWxS+HA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js" integrity="sha512-y23BV7zF0+OP2+9Q/PP5+xnXK6kC7xKHN3qKC8B5Z3oWvZKYzSvjIY9UoI+6Zx0aG3TXcQ8z+3rS6rG8bYQ6rKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    .textarea-container {
+        width: 90%;
+        height: 50vh;
+        margin-top: 100px;
+        min-width: 70vw;
+    }
 
-    <style>
-        :root {
-            --bg: #ffffff;
-            --text: #212529;
-            --code-bg: #f8f9fa;
-            --card-bg: #ffffff;
-        }
-        [data-bs-theme="dark"] {
-            --bg: #121212;
-            --text: #e0e0e0;
-            --code-bg: #1e1e1e;
-            --card-bg: #1e1e1e;
-        }
+    textarea {
+        width: 100%;
+        height: 50vh;
+        resize: none;
+        background-color: var(--textarea-bg);
+        color: var(--textarea-text);
+        border: 1px solid #ccc;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
 
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'IBM Plex Mono', 'Consolas', monospace;
-            transition: background 0.3s, color 0.3s;
-        }
+    .navbar {
+        background-color: var(--bg-color);
+        transition: background-color 0.3s ease;
+    }
 
+    .navbar-brand {
+        font-size: 3.4rem;
+        font-weight: 900;
+        color: var(--text-color);
+    }
+
+    .header {
+        font-size:3.2rem;
+        font-weight: 700;
+    }
+    .description {
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: var(--text-color);
+    }
+
+    .btn {
+        min-width: 120px;
+    }
+
+    .btn-light {
+        background-color: var(--btn-light-bg);
+        color: var(--text-color);
+    }
+
+    .btn-dark {
+        background-color: var(--btn-dark-bg);
+        color: var(--btn-dark-text);
+    }
+
+    .toggle-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+    }
+
+    .toggle-icon {
+        font-size: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
         .header {
-            font-size: clamp(2.2rem, 6vw, 3.5rem);
-            font-weight: 700;
+            font-size: 2rem;
         }
 
-        pre code.hljs {
-            padding: 1.25rem;
-            border-radius: 0.5rem;
-            background: var(--code-bg);
-            font-size: 0.95rem;
-            line-height: 1.5;
+        .description {
+            font-size: 1rem;
         }
 
-        .textarea-container pre {
-            margin: 0;
-            overflow-x: auto;
+        .textarea {
+            height: 40vh;
+            width: 85vw;
+            margin-left: -20px;
         }
 
-        .feature-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(128,128,128,0.2);
-            border-radius: 0.75rem;
-            transition: transform 0.25s, box-shadow 0.25s;
+        .textarea{
+            font-size: 13px;
         }
 
-        .feature-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+        .navbar-brand{
+            font-size: 1.9rem;
+        }
+        .secondHead{
+            font-size: 1.9rem;
         }
 
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            line-height: 60px;
-            font-size: 1.8rem;
-            border-radius: 50%;
-            background: #00cc6644;
-            color: #006633;
+        .btn {
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
         }
+    }
 
-        @media (max-width: 576px) {
-            .btn { width: 100%; margin-bottom: 0.75rem; }
-        }
-    </style>
-</head>
+    .feature-card {
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+        background-color: #11111100;
+        transition: transform 0.3s ease-in-out;
+        border: 1px solid #ccc;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        background-color: #a2a2a21c;
+    }
+
+    .feature-icon {
+        background: #fff;
+        color: #000;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 24px;
+    }
+
+    </style></head>
 <body>
-
-    <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
-            <div class="container-fluid px-4">
-                <a class="navbar-brand fw-bold fs-3" href="/">Ctrl+C</a>
-                <button id="themeToggle" class="btn btn-link" aria-label="Toggle theme">
-                    <i class="fa-solid fa-sun fs-4" id="lightIcon"></i>
-                    <i class="fa-solid fa-moon fs-4 d-none" id="darkIcon"></i>
-                </button>
+    <nav class="navbar navbar-light px-3">
+        <div class="container-fluid d-flex justify-content-between">
+            <a class="navbar-brand" href="#">Ctrl+C</a>
+            <div class="toggle-container" id="themeToggle">
+                <i class="fa-solid fa-sun toggle-icon" id="lightIcon"></i>
+                <i class="fa-solid fa-moon toggle-icon d-none" id="darkIcon"></i>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
-    <main class="container py-5">
-        <section class="text-center mb-5">
-            <h1 class="header mb-3">Here's Your Shared Code</h1>
-            <p class="lead text-body-secondary mb-4">
-                Copy and use it instantly — your snippet is preserved exactly as shared.
-            </p>
+<div class="container">
+    <h1 class="header">Here's Your Shared Code</h1>
+    <p class="description">
+        Share and manage your code snippets easily. Copy and paste seamlessly to boost your workflow.
+    </p>
+    <div class="textarea-container mt-3">
+        <textarea id="codeDisplay" class="textarea form-control" readonly></textarea>
+        <div class="mt-3 d-flex justify-content-between">
+            <button id="copyBtn" class="btn btn-light">
+                <i class="fa-solid fa-copy"></i> Copy Code
+            </button>
+            <button id="pasteBtn" class="btn btn-dark" onclick="window.location.href='/'">
+                <i class="fa-solid fa-paste"></i> Paste code
+            </button>
+            
+        </div>
+    </div>
+</div>
 
-            <div class="card shadow mx-auto" style="max-width: 960px;">
-                <div class="card-body p-0">
-                    <pre><code id="codeDisplay" class="loading">Loading code...</code></pre>
+<div class="container text-center my-2">
+    <h2 class="fw-bold secondHead">Why Choose <span>Ctrl+C?</span></h2>
+    <div class="row mt-1 g-4">
+        
+        <div class="col-md-4">
+            <div class="feature-card p-4">
+                <div class="feature-icon mx-auto mb-3">
+                    <i class="fas fa-rocket"></i>
                 </div>
-                <div class="card-footer bg-transparent border-0 d-flex flex-column flex-sm-row gap-3 justify-content-center p-4">
-                    <button id="copyBtn" class="btn btn-primary btn-lg">
-                        <i class="fa-solid fa-copy me-2"></i> Copy Code
-                    </button>
-                    <a href="/" class="btn btn-outline-secondary btn-lg">
-                        <i class="fa-solid fa-paste me-2"></i> Paste New Code
-                    </a>
-                </div>
+                <h5 class="fw-bold">Lightning Fast</h5>
+                <p>Our system ensures ultra-fast performance, helping you complete tasks in record time.</p>
             </div>
-        </section>
+        </div>
 
-        <section class="my-5">
-            <h2 class="text-center fw-bold mb-4" style="font-size: clamp(1.8rem, 5vw, 2.8rem);">
-                Why Choose <span class="text-success">Ctrl+C</span>?
-            </h2>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-3">
-                    <div class="feature-card text-center h-100 p-4">
-                        <div class="feature-icon mx-auto mb-3"><i class="fas fa-rocket"></i></div>
-                        <h5 class="fw-bold">Lightning Fast</h5>
-                        <p class="text-body-secondary">Share & load in seconds.</p>
-                    </div>
+        <div class="col-md-4">
+            <div class="feature-card p-4">
+                <div class="feature-icon mx-auto mb-3">
+                    <i class="fas fa-shield-alt"></i>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="feature-card text-center h-100 p-4">
-                        <div class="feature-icon mx-auto mb-3"><i class="fas fa-shield-alt"></i></div>
-                        <h5 class="fw-bold">Top Security</h5>
-                        <p class="text-body-secondary">Encrypted & protected.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="feature-card text-center h-100 p-4">
-                        <div class="feature-icon mx-auto mb-3"><i class="fas fa-code"></i></div>
-                        <h5 class="fw-bold">No Formatting</h5>
-                        <p class="text-body-secondary">Exact original code preserved.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="feature-card text-center h-100 p-4">
-                        <div class="feature-icon mx-auto mb-3"><i class="fas fa-clock"></i></div>
-                        <h5 class="fw-bold">Up to 7 Days</h5>
-                        <p class="text-body-secondary">Long-lived access.</p>
-                    </div>
-                </div>
+                <h5 class="fw-bold">Top Security</h5>
+                <p>Your data is encrypted and protected with the highest security standards in the industry.</p>
             </div>
-        </section>
-    </main>
+        </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <div class="col-md-4">
+            <div class="feature-card p-4">
+                <div class="feature-icon mx-auto mb-3">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h5 class="fw-bold">No Code Formatting</h5>
+                <p>Your code stays exactly as you wrote it, without any unwanted modifications or auto-formatting.</p>
+            </div>
+        </div>
 
-    <script>
-        // Theme handling (system preference fallback)
-        function loadTheme() {
-            let theme = localStorage.getItem("theme");
-            if (!theme) {
-                theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-            }
-            document.documentElement.setAttribute("data-bs-theme", theme);
-            document.getElementById("lightIcon").classList.toggle("d-none", theme === "dark");
-            document.getElementById("darkIcon").classList.toggle("d-none", theme === "light");
+        <div class="col-md-4">
+            <div class="feature-card p-4">
+                <div class="feature-icon mx-auto mb-3">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h5 class="fw-bold">Longer storage time</h5>
+                <p>Your code stays live for access for longer periods of time of upto 7 days.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    async function fetchCode() {
+        const slug = window.location.pathname.split("/").pop();
+        try {
+            const response = await fetch(`/api/code/${slug}`);
+            if (!response.ok) throw new Error("Failed to fetch code");
+            const data = await response.json();
+            document.getElementById("codeDisplay").value = data.code || "Code not found";
+        } catch (error) {
+            console.error("Error fetching code:", error);
+            document.getElementById("codeDisplay").value = "Failed to load code.";
         }
+    }
 
-        function toggleTheme() {
-            const current = document.documentElement.getAttribute("data-bs-theme");
-            const next = current === "dark" ? "light" : "dark";
-            document.documentElement.setAttribute("data-bs-theme", next);
-            localStorage.setItem("theme", next);
-            document.getElementById("lightIcon").classList.toggle("d-none", next === "dark");
-            document.getElementById("darkIcon").classList.toggle("d-none", next === "light");
+    //document.getElementById("copyBtn").addEventListener("click", () => {
+    //    const codeText = document.getElementById("codeDisplay").value;
+    //    navigator.clipboard.writeText(codeText)
+    //        .then(() => alert(" Code copied!"))
+    //        .catch(err => console.error("Failed to copy: ", err));
+    //});
+
+    document.getElementById("copyBtn").addEventListener("click", () => {
+        const codeText = document.getElementById("codeDisplay").value;
+    
+        if (navigator.clipboard && window.isSecureContext) {
+            // Use modern clipboard API (only works in secure HTTPS contexts)
+            navigator.clipboard.writeText(codeText)
+                .then(() => alert(" Code copied!"))
+                .catch(err => console.error("Failed to copy: ", err));
+        } else {
+            // Fallback method for mobile
+            const tempTextArea = document.createElement("textarea");
+            tempTextArea.value = codeText;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempTextArea);
+            alert(" Code copied!");
         }
+    });
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        fetchCode();
+        loadTheme();
+    });
 
-        // Fetch & highlight code
-        async function loadCode() {
-            const slug = location.pathname.split('/').filter(Boolean).pop();
-            const codeEl = document.getElementById("codeDisplay");
+    function loadTheme() {
+        const isDarkMode = localStorage.getItem("theme") === "dark";
+        document.body.classList.toggle("dark-mode", isDarkMode);
+        document.getElementById("lightIcon").classList.toggle("d-none", isDarkMode);
+        document.getElementById("darkIcon").classList.toggle("d-none", !isDarkMode);
+    }
 
-            try {
-                const res = await fetch(`/api/code/${slug}`);
-                if (!res.ok) {
-                    if (res.status === 404) {
-                        codeEl.textContent = "// Code not found or expired (links last up to 7 days)";
-                    } else {
-                        throw new Error("Fetch failed");
-                    }
-                    return;
-                }
+    document.getElementById("themeToggle").addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        const isDarkMode = document.body.classList.contains("dark-mode");
+        localStorage.setItem("theme", isDarkMode ? "dark" : "light");
 
-                const { code } = await res.json();
-                codeEl.textContent = code || "// Empty snippet";
-                codeEl.classList.remove("loading");
+        document.getElementById("lightIcon").classList.toggle("d-none", isDarkMode);
+        document.getElementById("darkIcon").classList.toggle("d-none", !isDarkMode);
+    });
 
-                // Highlight.js auto-detects language
-                hljs.highlightElement(codeEl);
-            } catch (err) {
-                console.error(err);
-                codeEl.textContent = "// Failed to load code. Try again later.";
-            }
-        }
-
-        // Copy code
-        document.addEventListener("DOMContentLoaded", () => {
-            loadTheme();
-            loadCode();
-
-            document.getElementById("themeToggle").addEventListener("click", toggleTheme);
-
-            document.getElementById("copyBtn").addEventListener("click", () => {
-                const code = document.getElementById("codeDisplay").textContent;
-                if (!code.trim()) return;
-
-                if (navigator.clipboard && window.isSecureContext) {
-                    navigator.clipboard.writeText(code)
-                        .then(() => alert("Code copied to clipboard!"))
-                        .catch(err => console.error("Clipboard error:", err));
-                } else {
-                    // Fallback
-                    const ta = document.createElement("textarea");
-                    ta.value = code;
-                    ta.setAttribute("readonly", "");
-                    ta.style.position = "absolute";
-                    ta.style.left = "-9999px";
-                    document.body.appendChild(ta);
-                    ta.select();
-                    document.execCommand("copy");
-                    document.body.removeChild(ta);
-                    alert("Code copied (fallback method)!");
-                }
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker
+            .register('/service-worker.js')
+            .then(function (registration) {
+              console.log(
+                'Service Worker registered with scope:',
+                registration.scope
+              );
+            })
+            .catch(function (error) {
+              console.log('Service Worker registration failed:', error);
             });
         });
-    </script>
-</body>
+      }
+</script></body>
 </html>
+
