@@ -1,24 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sharing your codes made easy.">
-    <meta name="keywords" content="web development, coding, technology, canol, maseno">
+    <meta name="description" content="Share and manage your code snippets easily. Copy and paste seamlessly to boost your workflow.">
+    <meta name="keywords" content="code sharing, pastebin, snippet, developer tools, canol, maseno">
     <meta name="author" content="Owano Canol">
     <meta name="robots" content="index, follow">
-    <meta http-equiv="content-language" content="en">
-    <title>Ctrl+C</title>
+    <meta name="theme-color" content="#00CC66">
 
-    <!-- Twitter Card (Enhances Tweet Appearance) -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Ctrl+C">
-    <meta name="twitter:description" content="Sharing your codes made easy.">
-    <meta name="twitter:image" content="https://ctrl-c.onrender.com/code-sharing-app.jpg">
-    <meta name="twitter:site" content="@Canol_Okoth">
-    <meta name="twitter:creator" content="@Canol_okoth">
+    <title>Ctrl+C – Share Code Snippets Fast</title>
 
-    <!-- Open Graph Protocol (For Social Sharing - Facebook, LinkedIn, WhatsApp) -->
+    <!-- Open Graph / Social Sharing -->
     <meta property="og:title" content="Ctrl+C">
     <meta property="og:description" content="Sharing your code made easy.">
     <meta property="og:image" content="https://ctrl-c.onrender.com/code-sharing-app.jpg">
@@ -26,272 +19,326 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Ctrl+C">
 
-    <!-- Favicon (Displayed on Browser Tabs) -->
-    <link rel="icon" href="code-sharing-app.jpg" type="image/jpg">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
-    <!-- Theme Color (Mobile Browser UI Color) -->
-    <meta name="theme-color" content="#00CC66">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ctrl+C">
+    <meta name="twitter:description" content="Sharing your code made easy.">
+    <meta name="twitter:image" content="https://ctrl-c.onrender.com/code-sharing-app.jpg">
+    <meta name="twitter:site" content="@Canol_Okoth">
+    <meta name="twitter:creator" content="@Canol_Okoth">
+
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <!-- Analytics (Umami) -->
     <script defer src="https://cloud.umami.is/script.js" data-website-id="3bac2e4a-829b-455b-b676-13c5c3c57638"></script>
 
-    <link rel="manifest" href="/manifest.json" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-   <link rel="stylesheet" href="style.css">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Styles -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Quick dark mode fallback – move to style.css later */
+        [data-bs-theme="dark"] {
+            --bs-body-bg: #121212;
+            --bs-body-color: #e0e0e0;
+        }
+        .textarea-container textarea {
+            min-height: 240px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1rem;
+            resize: vertical;
+        }
+        .feature-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+    </style>
 </head>
 <body>
-    
-    <nav class="navbar navbar-light px-3">
-        <div class="container-fluid d-flex justify-content-between">
-            <a class="navbar-brand" href="#">Ctrl+C</a>
-            <div class="toggle-container" id="themeToggle">
-                <i class="fa-solid fa-sun toggle-icon" id="lightIcon"></i>
-                <i class="fa-solid fa-moon toggle-icon d-none" id="darkIcon"></i>
-            </div>
-        </div>
-    </nav>
 
-    <div class="container">
-        <p id="linkDisplay" class="mt-4 text-lg text-gray-700 flex items-center space-x-4"></p>
-        <h1 class="header">Paste Your Code Here</h1>
-        <p class="description">
-            Share and manage your code snippets easily. Copy and paste seamlessly to boost your workflow.
-        </p>
-    
-        <div class="textarea-container mt-3">
-            <textarea id="codeInput" class="textarea form-control" placeholder="Paste your code here..." required></textarea>
-    
-            <div class="mt-3 d-flex justify-content-between align-items-center">
-                <div class="d-flex gap-2">
-                    <!-- Upload File Button -->
-                    <label class="btn btn-secondary responsive-btn">
-                        <i class="fa-solid fa-upload"></i> <span class="btn-text">Upload File</span>
-                        <input type="file" id="fileInput" hidden>
-                    </label>
-            
-                    <button id="submitBtn" class="btn btn-light responsive-btn">
-                        <i class="fa-solid fa-link"></i> <span class="btn-text">Generate Link</span>
-                    </button>
-                </div>
-            
-                <button id="pasteBtn" class="btn btn-dark responsive-btn">
-                    <i class="fa-solid fa-paste"></i> <span class="btn-text">Paste Code</span>
+    <header>
+        <nav class="navbar navbar-expand navbar-light bg-body-tertiary px-3">
+            <div class="container-fluid d-flex justify-content-between">
+                <a class="navbar-brand fw-bold fs-4" href="/">Ctrl+C</a>
+                <button id="themeToggle" class="btn btn-link" aria-label="Toggle dark mode">
+                    <i class="fa-solid fa-sun fs-5" id="lightIcon"></i>
+                    <i class="fa-solid fa-moon fs-5 d-none" id="darkIcon"></i>
                 </button>
             </div>
-            
+        </nav>
+    </header>
 
-        </div>
-    </div>
-    
+    <main class="container my-5">
+        <section class="text-center mb-5">
+            <h1 class="display-4 fw-bold">Paste Your Code Here</h1>
+            <p class="lead text-body-secondary">
+                Share and manage your code snippets easily. Copy and paste seamlessly to boost your workflow.
+            </p>
 
-    <div class="container text-center my-1">
-        <h2 class="fw-bold secondHead">Why Choose <span>Ctrl+C?</span></h2>
-        <div class="row mt-3 g-4">
-            
-            <div class="col-md-4">
-                <div class="feature-card p-4">
-                    <div class="feature-icon mx-auto mb-3">
-                        <i class="fas fa-rocket"></i>
+            <p id="linkDisplay" class="mt-4 fs-5 text-success fw-medium d-none"></p>
+
+            <div class="textarea-container card p-4 shadow-sm">
+                <textarea id="codeInput" class="form-control font-monospace" placeholder="Paste (Ctrl+V) or drop your code/file here..." rows="10" required aria-describedby="codeHelp"></textarea>
+                <small id="codeHelp" class="form-text text-muted mt-2">Your code is stored securely and unchanged — up to 7 days.</small>
+
+                <div class="mt-4 d-flex flex-wrap gap-3 justify-content-between">
+                    <div class="d-flex flex-wrap gap-2">
+                        <label class="btn btn-outline-secondary">
+                            <i class="fa-solid fa-upload me-1"></i> Upload File
+                            <input type="file" id="fileInput" accept="text/*,.txt,.js,.py,.html,.css,.json" hidden>
+                        </label>
+
+                        <button id="submitBtn" class="btn btn-primary" disabled>
+                            <i class="fa-solid fa-link me-1"></i> Generate Link
+                        </button>
                     </div>
-                    <h5 class="fw-bold">Lightning Fast</h5>
-                    <p>Our system ensures ultra-fast performance, helping you complete tasks in record time.</p>
+
+                    <button id="pasteBtn" class="btn btn-outline-dark">
+                        <i class="fa-solid fa-paste me-1"></i> Paste from Clipboard
+                    </button>
                 </div>
             </div>
-    
-            <div class="col-md-4">
-                <div class="feature-card p-4">
-                    <div class="feature-icon mx-auto mb-3">
-                        <i class="fas fa-shield-alt"></i>
+        </section>
+
+        <section class="my-5">
+            <h2 class="text-center fw-bold display-6 mb-4">Why Choose <span class="text-success">Ctrl+C</span>?</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card card h-100 text-center border-0 shadow-sm bg-body-tertiary">
+                        <div class="card-body">
+                            <div class="feature-icon fs-1 mb-3 text-primary"><i class="fas fa-rocket"></i></div>
+                            <h5 class="card-title fw-bold">Lightning Fast</h5>
+                            <p class="card-text text-body-secondary">Ultra-fast performance — share in seconds.</p>
+                        </div>
                     </div>
-                    <h5 class="fw-bold">Top Security</h5>
-                    <p>Your data is encrypted and protected with the highest security standards in the industry.</p>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card card h-100 text-center border-0 shadow-sm bg-body-tertiary">
+                        <div class="card-body">
+                            <div class="feature-icon fs-1 mb-3 text-success"><i class="fas fa-shield-alt"></i></div>
+                            <h5 class="card-title fw-bold">Top Security</h5>
+                            <p class="card-text text-body-secondary">Encrypted transfers & secure storage.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card card h-100 text-center border-0 shadow-sm bg-body-tertiary">
+                        <div class="card-body">
+                            <div class="feature-icon fs-1 mb-3 text-info"><i class="fas fa-code"></i></div>
+                            <h5 class="card-title fw-bold">No Formatting</h5>
+                            <p class="card-text text-body-secondary">Your code stays exactly as you wrote it.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card card h-100 text-center border-0 shadow-sm bg-body-tertiary">
+                        <div class="card-body">
+                            <div class="feature-icon fs-1 mb-3 text-warning"><i class="fas fa-clock"></i></div>
+                            <h5 class="card-title fw-bold">Up to 7 Days</h5>
+                            <p class="card-text text-body-secondary">Longer storage — access when you need it.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-    
-            <div class="col-md-4">
-                <div class="feature-card p-4">
-                    <div class="feature-icon mx-auto mb-3">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h5 class="fw-bold">No Code Formatting</h5>
-                    <p>Your code stays exactly as you wrote it, without any unwanted modifications or auto-formatting.</p>
-                </div>
-            </div>
+        </section>
+    </main>
 
-            <div class="col-md-4">
-                <div class="feature-card p-4">
-                    <div class="feature-icon mx-auto mb-3">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h5 class="fw-bold">Longer storage time</h5>
-                    <p>Your code stays live for access for longer periods of time of upto 7 days.</p>
-                </div>
-            </div>
-    
-        </div>
-    </div>
-
-
-    <footer class="bg-dark text-light py-2">
-        <div class="container text-center">
-            <div class="row align-items-center gy-2">
-                
-                <!-- Technologies Used -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row gy-4">
                 <div class="col-md-3">
-                    <h6 class="fw-bold mb-1">Built With</h6>
-                    <div class="d-flex justify-content-center gap-2">
-                        <i class="fab fa-html5 fa-sm text-danger" title="HTML5"></i>
-                        <i class="fab fa-css3-alt fa-sm text-primary" title="CSS3"></i>
-                        <i class="fab fa-js fa-sm text-warning" title="JavaScript"></i>
-                        <i class="fab fa-bootstrap fa-sm text-purple" title="Bootstrap"></i>
-                        <i class="fab fa-node-js fa-sm text-success" title="Node.js"></i>
-                        <i class="fas fa-database fa-sm text-secondary" title="MongoDB"></i>
+                    <h6 class="fw-bold mb-3">Built With</h6>
+                    <div class="d-flex gap-3 fs-4">
+                        <i class="fab fa-html5 text-danger" title="HTML5"></i>
+                        <i class="fab fa-css3-alt text-primary" title="CSS3"></i>
+                        <i class="fab fa-js text-warning" title="JavaScript"></i>
+                        <i class="fab fa-bootstrap text-info" title="Bootstrap"></i>
+                        <i class="fab fa-node-js text-success" title="Node.js"></i>
+                        <i class="fas fa-database text-secondary" title="MongoDB"></i>
                     </div>
                 </div>
-    
-                <!-- Creator Information -->
+
                 <div class="col-md-3">
-                    <h6 class="fw-bold mb-1">Created By</h6>
-                    <p class="mb-0 small">Owano Canol</p>
-                    <p class="text-muted small mb-0">Code Sharing Simplified.</p>
+                    <h6 class="fw-bold mb-3">Created By</h6>
+                    <p class="mb-1">Owano Canol</p>
+                    <p class="text-white-50 small">Code Sharing Simplified.</p>
                 </div>
-    
-                <!-- Recent Links Section -->
+
                 <div class="col-md-3">
-                    <h6 class="fw-bold mb-1">Recent Links</h6>
+                    <h6 class="fw-bold mb-3">Recent Links</h6>
                     <div id="recent-links" class="list-group list-group-flush small">
-                        <p class="text-muted text-center mb-0">No recent links yet...</p>
+                        <p class="text-white-50 text-center mb-0">Loading recent links...</p>
                     </div>
                 </div>
-    
-                <!-- Social Media Links -->
+
                 <div class="col-md-3">
-                    <h6 class="fw-bold mb-1">Follow Me</h6>
-                    <div class="d-flex justify-content-center gap-2">
-                        <a href="https://twitter.com/Canol_Okoth" target="_blank" class="text-light">
-                            <i class="fab fa-twitter fa-sm"></i>
+                    <h6 class="fw-bold mb-3">Follow Me</h6>
+                    <div class="d-flex gap-3 fs-4">
+                        <a href="https://twitter.com/Canol_Okoth" target="_blank" rel="noopener noreferrer" class="text-white">
+                            <i class="fab fa-x-twitter"></i>
                         </a>
-                        <a href="https://github.com/canol" target="_blank" class="text-light">
-                            <i class="fab fa-github fa-sm"></i>
+                        <a href="https://github.com/canol" target="_blank" rel="noopener noreferrer" class="text-white">
+                            <i class="fab fa-github"></i>
                         </a>
-                        <a href="https://linkedin.com/in/canol" target="_blank" class="text-light">
-                            <i class="fab fa-linkedin fa-sm"></i>
+                        <a href="https://linkedin.com/in/canol" target="_blank" rel="noopener noreferrer" class="text-white">
+                            <i class="fab fa-linkedin"></i>
                         </a>
                     </div>
                 </div>
             </div>
-    
-            <!-- Copyright -->
-            <div class="text-center mt-2 small text-muted">
-                &copy; 2025 Ctrl+C. All Rights Reserved.
-                <a href="https://cloud.umami.is/share/Zazv77dpff8dSv6z/ctrl-c.onrender.com">Analytics</a>
+
+            <div class="text-center mt-4 small text-white-50">
+                © 2025 Ctrl+C. All Rights Reserved.
+                <span class="mx-2">•</span>
+                <a href="https://cloud.umami.is/share/Zazv77dpff8dSv6z/ctrl-c.onrender.com" class="text-white-50" target="_blank" rel="noopener">Analytics</a>
             </div>
         </div>
     </footer>
-    
-    
 
-    <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="script.js" defer></script>
     <script>
+        // Theme handling
+        function loadTheme() {
+            const isDark = localStorage.getItem("theme") === "dark" ||
+                           (!localStorage.getItem("theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+            document.documentElement.setAttribute("data-bs-theme", isDark ? "dark" : "light");
+            document.getElementById("lightIcon").classList.toggle("d-none", isDark);
+            document.getElementById("darkIcon").classList.toggle("d-none", !isDark);
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute("data-bs-theme");
+            const next = current === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-bs-theme", next);
+            localStorage.setItem("theme", next);
+            document.getElementById("lightIcon").classList.toggle("d-none", next === "dark");
+            document.getElementById("darkIcon").classList.toggle("d-none", next === "light");
+        }
+
+        // DOM ready
         document.addEventListener("DOMContentLoaded", () => {
             loadTheme();
-        });
+            document.getElementById("themeToggle").addEventListener("click", toggleTheme);
 
-        function loadTheme() {
-            const isDarkMode = localStorage.getItem("theme") === "dark";
-            document.body.classList.toggle("dark-mode", isDarkMode);
-            document.getElementById("lightIcon").classList.toggle("d-none", isDarkMode);
-            document.getElementById("darkIcon").classList.toggle("d-none", !isDarkMode);
-        }
+            const codeInput     = document.getElementById("codeInput");
+            const fileInput     = document.getElementById("fileInput");
+            const submitBtn     = document.getElementById("submitBtn");
+            const pasteBtn      = document.getElementById("pasteBtn");
+            const linkDisplay   = document.getElementById("linkDisplay");
 
-        document.getElementById("themeToggle").addEventListener("click", () => {
-            document.body.classList.toggle("dark-mode");
-            const isDarkMode = document.body.classList.contains("dark-mode");
-            localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-
-            document.getElementById("lightIcon").classList.toggle("d-none", isDarkMode);
-            document.getElementById("darkIcon").classList.toggle("d-none", !isDarkMode);
-        });
-    
-    document.getElementById("fileInput").addEventListener("change", function(event) {
-        const file = event.target.files[0];
-    
-        if (file) {
-            const reader = new FileReader();
-    
-            reader.onload = function(e) {
-                document.getElementById("codeInput").value = e.target.result;
+            // Enable/disable generate button
+            const updateSubmitBtn = () => {
+                submitBtn.disabled = !codeInput.value.trim();
             };
-    
-            reader.readAsText(file); // Read file as text
-        }
-    });
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const codeInput = document.getElementById("codeInput");
-        const submitBtn = document.getElementById("submitBtn");
-        const fileInput = document.getElementById("fileInput");
-    
-        // Function to check if button should be enabled
-        function checkEnableButton() {
-            submitBtn.disabled = !(codeInput.value.trim() || fileInput.files.length > 0);
-        }
-    
-        // Disable button initially
-        checkEnableButton();
-    
-        // Enable button when there's text
-        codeInput.addEventListener("input", checkEnableButton);
-    
-        // Enable button when a file is uploaded
-        fileInput.addEventListener("change", function () {
-            const file = fileInput.files[0];
-            if (file) {
+            codeInput.addEventListener("input", updateSubmitBtn);
+
+            // File upload
+            fileInput.addEventListener("change", (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
                 const reader = new FileReader();
-                reader.onload = function (event) {
-                    codeInput.value = event.target.result; // Insert file content into textarea
-                    checkEnableButton(); // Recheck if button should be enabled
+                reader.onload = (ev) => {
+                    codeInput.value = ev.target.result;
+                    updateSubmitBtn();
                 };
-                reader.readAsText(file); // Read file as text
-            }
-        });
-    });
-    
-    document.addEventListener("DOMContentLoaded", async () => {
-        try {
-            const response = await fetch("/api/code/recent-links");
-            const recentLinks = await response.json();
-    
-            const recentLinksContainer = document.getElementById("recentLinksContainer");
-            if (recentLinks.length === 0) {
-                recentLinksContainer.innerHTML = "<p>No recent links yet...</p>";
-            } else {
-                recentLinksContainer.innerHTML = recentLinks.map(link => `
-                    <a href="/code/${link.slug}" class="list-group-item list-group-item-action">${link.slug}</a>
-                `).join("");
-            }
-        } catch (error) {
-            console.error("Error fetching recent links:", error);
-        }
-    });
-
-
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-          navigator.serviceWorker
-            .register('/service-worker.js')
-            .then(function (registration) {
-              console.log(
-                'Service Worker registered with scope:',
-                registration.scope
-              );
-            })
-            .catch(function (error) {
-              console.log('Service Worker registration failed:', error);
+                reader.readAsText(file);
             });
+
+            // Paste from clipboard button
+            pasteBtn.addEventListener("click", async () => {
+                try {
+                    const text = await navigator.clipboard.readText();
+                    if (text) {
+                        codeInput.value = text;
+                        updateSubmitBtn();
+                        codeInput.focus();
+                    }
+                } catch (err) {
+                    console.warn("Clipboard access denied", err);
+                    alert("Couldn't access clipboard. Please paste manually (Ctrl+V).");
+                }
+            });
+
+            // Generate link – placeholder (replace with real fetch to your backend)
+            submitBtn.addEventListener("click", async () => {
+                const code = codeInput.value.trim();
+                if (!code) return;
+
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Generating...';
+
+                try {
+                    // Replace with your real endpoint
+                    const res = await fetch("/api/code", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ content: code })
+                    });
+
+                    if (!res.ok) throw new Error("Server error");
+
+                    const { url, slug } = await res.json();
+                    linkDisplay.textContent = `Your link: ${url || `https://ctrl-c.onrender.com/code/${slug}`}`;
+                    linkDisplay.classList.remove("d-none");
+
+                    // Optional: auto-select link
+                    linkDisplay.addEventListener("click", () => {
+                        navigator.clipboard.writeText(linkDisplay.textContent.replace("Your link: ", ""));
+                    }, { once: true });
+
+                } catch (err) {
+                    console.error(err);
+                    alert("Failed to generate link. Please try again.");
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fa-solid fa-link me-1"></i> Generate Link';
+                }
+            });
+
+            // Optional: Fetch recent links (uncomment & adjust endpoint when backend ready)
+            /*
+            fetch("/api/code/recent-links")
+                .then(r => r.json())
+                .then(links => {
+                    const container = document.getElementById("recent-links");
+                    if (links.length === 0) {
+                        container.innerHTML = '<p class="text-white-50 text-center mb-0">No recent links yet...</p>';
+                        return;
+                    }
+                    container.innerHTML = links.map(l => `
+                        <a href="/code/${l.slug}" class="list-group-item list-group-item-action bg-dark text-white border-0">${l.slug}</a>
+                    `).join("");
+                })
+                .catch(() => {
+                    document.getElementById("recent-links").innerHTML = '<p class="text-danger text-center mb-0">Failed to load recent links</p>';
+                });
+            */
         });
-      }
+
+        // Service Worker (PWA) – keep only if you actually have service-worker.js
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("/service-worker.js")
+                    .then(reg => console.log("Service Worker registered", reg.scope))
+                    .catch(err => console.warn("Service Worker failed", err));
+            });
+        }
     </script>
 </body>
 </html>
-    
